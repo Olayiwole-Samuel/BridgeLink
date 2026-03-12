@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import webImage from "../../assets/modern-office-equipment-blue-desk-generated-by-ai.jpg";
 import cyberImage from "../../assets/hacker-dark-neon-lit-underground-hq-coding-malware.jpg";
@@ -41,9 +42,12 @@ const services = [
 ];
 
 export default function Services() {
+
     const containerRef = useRef(null);
     const [progress, setProgress] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkScreen = () => {
@@ -57,9 +61,11 @@ export default function Services() {
     }, []);
 
     useEffect(() => {
+
         if (isMobile) return;
 
         const handleScroll = () => {
+
             const el = containerRef.current;
             if (!el) return;
 
@@ -78,6 +84,7 @@ export default function Services() {
         window.addEventListener("scroll", handleScroll);
 
         return () => window.removeEventListener("scroll", handleScroll);
+
     }, [isMobile]);
 
     const activeIndex = Math.min(
@@ -90,8 +97,11 @@ export default function Services() {
             ref={containerRef}
             className="relative bg-black text-white py-32 overflow-hidden"
         >
+
             {/* GRID BACKGROUND */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none bg-[linear-gradient(#1e293b_1px,transparent_1px),linear-gradient(90deg,#1e293b_1px,transparent_1px)] bg-[size:60px_60px] animate-[gridmove_20s_linear_infinite]" />
+            <div className="absolute inset-0 opacity-20 pointer-events-none
+            bg-[linear-gradient(#1e293b_1px,transparent_1px),linear-gradient(90deg,#1e293b_1px,transparent_1px)]
+            bg-[size:60px_60px] animate-[gridmove_20s_linear_infinite]" />
 
             <div className="max-w-7xl mx-auto px-6 relative">
 
@@ -199,7 +209,10 @@ export default function Services() {
                 {/* SEE MORE BUTTON */}
                 <div className="flex justify-center mt-24">
 
-                    <button className="cursor-pointer relative px-10 py-4 text-blue-400 border border-blue-500/40 rounded-full backdrop-blur-md overflow-hidden group transition-all duration-300 hover:scale-105 hover:border-blue-400">
+                    <button
+                        onClick={() => navigate("/services")}
+                        className="cursor-pointer relative px-10 py-4 text-blue-400 border border-blue-500/40 rounded-full backdrop-blur-md overflow-hidden group transition-all duration-300 hover:scale-105 hover:border-blue-400"
+                    >
 
                         <span className="relative z-10 font-medium tracking-wide">
                             See More
@@ -216,6 +229,7 @@ export default function Services() {
                 </div>
 
             </div>
+
         </section>
     );
 }
